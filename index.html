@@ -67,21 +67,38 @@
         var password = document.getElementById('password');
         var number = document.getElementById('number');
 
-        var num = Math. floor(Math. random() * 100);
-        var nameRef = 'User_id='+num+name.value+'/';
 
         function add(){
-            set(ref(database,nameRef,number.value),{
+          let num;
+
+          var dbref = ref(database)
+
+          get(child(dbref,'Users/')).then((snapshot) => {
+          
+              num =   snapshot.size;
+              // console.log(snapshot.val().Name)
+              console.log(num)
+              // Object.keys(Users).length;
+
+            num = snapshot.size +1;
+
+
+              set(ref(database,'Users/'+num),{
                 Name:name.value,
                 Password:password.value,
                 Contact_Number:number.value
             }).then(() => {
                 alert('successfully added');
-               location.reload();
+              //  location.reload();
             }).catch(() => {
                 alert('unsuccessful');
             })
+          });
+
+            
         }
+
+
 
         login.addEventListener('click',add);
 
