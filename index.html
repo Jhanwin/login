@@ -68,7 +68,7 @@
         var number = document.getElementById('number');
 
         var num = Math. floor(Math. random() * 100);
-        var nameRef = 'User'+num+'/';
+        var nameRef = 'User_id='+num+'/'+name.value;
 
         function add(){
             set(ref(database,nameRef,number.value),{
